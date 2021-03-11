@@ -10,3 +10,4 @@ documaniaworkflow-back/.mvn/timing.properties
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar
 documaniaworkflow-back/.mvn/wrapper/maven-wrapper.jar
 .metadata/
+RemoteSystemsTempFiles/
