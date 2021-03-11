@@ -8,21 +8,43 @@ import { AppTextConfigService } from './services/i18n/app-text-config-service.se
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpInterceptorService } from './services/auth/basic-auth-interceptor.service';
+import { AuthGuard } from './services/auth.guard';
+import { AuthService } from './services/auth/auth.service';
+import { CamundaRestService } from './services/rest/camunda-rest.service';
+import { HomeComponent } from './components/home/home.component';
+import { UploadComponent } from './components/upload/upload.component';
+import { StartComponent } from './components/start/start.component';
+import { TasksComponent } from './components/tasks/tasks.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent,
+    UploadComponent,
+    StartComponent,
+    TasksComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     CommonModule,
+    HttpClientModule,
     FormsModule
   ],
   providers: [
-    AppTextConfigService
+    AppTextConfigService,
+    CamundaRestService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true
+    },
+    AuthGuard,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
