@@ -79,13 +79,13 @@
 
     exports = ___CSS_LOADER_API_IMPORT___(true); // Module
 
-    exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\n", "", {
+    exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\r\n", "", {
       "version": 3,
       "sources": ["styles.css"],
       "names": [],
       "mappings": "AAAA,8EAA8E",
       "file": "styles.css",
-      "sourcesContent": ["/* You can add global styles to this file, and also import other style files */\n"]
+      "sourcesContent": ["/* You can add global styles to this file, and also import other style files */\r\n"]
     }]); // Exports
 
     module.exports = exports;

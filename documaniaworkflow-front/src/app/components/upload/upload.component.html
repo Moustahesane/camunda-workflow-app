@@ -1,40 +1,38 @@
-
-
 <div class="container-fluid">
     <div class="row">
-       <div class="col-6">
-         <div class="card">
-             <div class="card-body">
-                <h3 class="mb-3">
-                    
-                    Télécharger une model.
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="mb-3">
 
-                </h3>
-                <div class="my-2">
+                        Télécharger une model.
+
+                    </h3>
+                    <div class="my-2">
+
+                    </div>
+                    <form class="form">
+                        <div class="input-group mb-3">
+                            <div class="custom-file">
+                                <input (change)="handleFileInput($event.target.files)" type="file" class="custom-file-input" id="inputGroupFile02">
+                                <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
+                            </div>
+                            <div class="input-group-append">
+                                <button (click)="uploadFileToActivity()" class="btn btn-primary">
+                               Télécharger
+                                
+                              </button>
+                            </div>
+                        </div>
+                    </form>
 
                 </div>
-                <form class="form">
-                    <div class="input-group mb-3">
-                        <div class="custom-file">
-                          <input type="file" class="custom-file-input" id="inputGroupFile02">
-                          <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
-                        </div>
-                        <div class="input-group-append">
-                          <span class="input-group-text" id="inputGroupFileAddon02">Upload</span>
-                        </div>
-                      </div>
-                </form>
-
-             </div>
-         </div>
+            </div>
 
 
-       </div>
+        </div>
 
 
     </div>
 
 </div>
-
-
-

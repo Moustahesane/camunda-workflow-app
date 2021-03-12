@@ -4,21 +4,26 @@
         <div class="col-3">
             <div class="card">
                 <div class="card-body">
-                <div class="h4 my-1">
-                    La liste des proccessus : 
-                </div>
-                <li>
-                    <a href="">Documania</a>
-                </li>
-                <li>Documania </li>
-                <li>Documania </li>
-                <li>Documania </li>
-                <li>Documania </li>
+                    <div class="h4 my-1">
+                        La liste des proccessus :
+                    </div>
+                    <ul>
+                        <li *ngFor="let pd of this.processDefinitions"> <a routerLink="process/{{pd.key}}">{{ pd.name ? pd.name :pd.key }}</a> </li>
+                    </ul>
 
 
                 </div>
             </div>
         </div>
+        <div class="col-6">
+
+            <router-outlet></router-outlet>
+
+
+
+        </div>
+
+
     </div>
 
 

@@ -17,6 +17,7 @@ import { HomeComponent } from './components/home/home.component';
 import { UploadComponent } from './components/upload/upload.component';
 import { StartComponent } from './components/start/start.component';
 import { TasksComponent } from './components/tasks/tasks.component';
+import { StartProcessComponent } from './components/start-process/start-process.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { TasksComponent } from './components/tasks/tasks.component';
     HomeComponent,
     UploadComponent,
     StartComponent,
-    TasksComponent
+    TasksComponent,
+    StartProcessComponent
   ],
   imports: [
     BrowserModule,

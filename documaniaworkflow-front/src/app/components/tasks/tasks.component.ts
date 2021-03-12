@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CamundaRestService } from 'src/app/services/rest/camunda-rest.service';
 
 @Component({
   selector: 'app-tasks',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TasksComponent implements OnInit {
 
-  constructor() { }
+   processDefinitions;
 
-  ngOnInit(): void {
+  constructor(private camundaRestService: CamundaRestService) { }
+
+  ngOnInit() {
+    this.getProcessDefinitions();
   }
 
+  getProcessDefinitions(): void {
+    this.camundaRestService
+      .getProcessDefinitions()
+      .subscribe(processDefinitions => this.processDefinitions = processDefinitions);
+  }
 }

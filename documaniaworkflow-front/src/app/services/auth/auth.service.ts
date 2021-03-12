@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
-const BASE_AUTH_URL =environment.CAMUNDA_URL+"/identity/verify"
+const BASE_AUTH_URL =environment.CAMUNDA_URL+"identity/verify"
 
 
 @Injectable({

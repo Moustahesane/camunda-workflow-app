@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CamundaRestService } from 'src/app/services/rest/camunda-rest.service';
 
 @Component({
   selector: 'app-upload',
@@ -7,9 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UploadComponent implements OnInit {
 
-  constructor() { }
+  private fileToUpload: File = null;
+  private SUCCESS: boolean = false;
+  
+  constructor(private camundaRestService: CamundaRestService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+  }
+
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+    this.uploadFileToActivity();
+  }
+
+  uploadFileToActivity() {
+    this.camundaRestService.deployProcess(this.fileToUpload).subscribe(data => {
+      this.SUCCESS = true;
+      }, error => {
+        console.log(error);
+    });
   }
 
 }

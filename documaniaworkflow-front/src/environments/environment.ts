@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  CAMUNDA_URL : "http://localhost:8800/engine-rest"
+  CAMUNDA_URL : "http://localhost:8800/engine-rest/"
 };
 
 /*

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { StartProcessComponent } from './components/start-process/start-process.component';
 import { StartComponent } from './components/start/start.component';
 import { TasksComponent } from './components/tasks/tasks.component';
 import { UploadComponent } from './components/upload/upload.component';
@@ -13,7 +14,9 @@ const routes: Routes = [
   {
     path: "home", component: HomeComponent, children: [
       { path: "upload", component: UploadComponent },
-      { path: "start", component: StartComponent },
+      { path: "start", component: StartComponent ,children : [
+        {path: "process/:processdefinitionkey", component: StartProcessComponent}
+      ] },
       { path: "tasks", component: TasksComponent }
 
 
