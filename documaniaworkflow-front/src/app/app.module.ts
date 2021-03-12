@@ -18,6 +18,8 @@ import { UploadComponent } from './components/upload/upload.component';
 import { StartComponent } from './components/start/start.component';
 import { TasksComponent } from './components/tasks/tasks.component';
 import { StartProcessComponent } from './components/start-process/start-process.component';
+import { GenericformComponent } from './components/genericform/genericform.component';
+import { DotaskComponent } from './components/dotask/dotask.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { StartProcessComponent } from './components/start-process/start-process.
     UploadComponent,
     StartComponent,
     TasksComponent,
-    StartProcessComponent
+    StartProcessComponent,
+    GenericformComponent,
+    DotaskComponent
   ],
   imports: [
     BrowserModule,

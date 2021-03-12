@@ -12,6 +12,12 @@ let BASE_URL = environment.CAMUNDA_URL
 })
 export class CamundaRestService {
 
+  
+
+
+
+
+
 private engineRestUrl;
   constructor(private http:HttpClient) { 
     this.engineRestUrl = BASE_URL
@@ -35,6 +41,7 @@ private engineRestUrl;
       catchError(this.handleError('getProcessDefinitions', []))
     );
   }
+  
 
   
   deployProcess(fileToUpload: File): Observable<any> {
@@ -49,7 +56,13 @@ private engineRestUrl;
     return this.http.post(endpoint, formData);
   }
 
-
+  renderStartForm(arg0: string) {
+   const endPoint = this.engineRestUrl + arg0
+   return this.http.get(endPoint,{responseType: 'text'}).pipe(
+    tap(StartForm => this.log(`fetched StartForm`)),
+    catchError(this.handleError('getStartForm', []))
+  );
+  }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
@@ -69,5 +82,42 @@ private engineRestUrl;
   private log(message: string) {
     console.log(message);
   }
+
+   getStratFormVariables(key) 
+   {
+    
+    const endpoint = `${this.engineRestUrl}process-definition/key/${key}/form-variables`;
+    return this.http.get<any>(endpoint).pipe(
+      tap(form => this.log(`form-variables`)),
+      catchError(this.handleError('form-variables', []))
+    );
+   
+   }
+
+  
+  getTasks(): Observable<any> {
+    const endpoint = `${this.engineRestUrl}task?sortBy=created&sortOrder=desc&maxResults=10`;
+    return this.http.get<any>(endpoint).pipe(
+      tap(form => this.log(`fetched tasks`)),
+      catchError(this.handleError('getTasks', []))
+    );
+  }
+
+  getTaskFormKey(taskId: String): Observable<any> {
+    const endpoint = `${this.engineRestUrl}task/${taskId}/form`;
+    return this.http.get<any>(endpoint).pipe(
+      tap(form => this.log(`fetched taskform`)),
+      catchError(this.handleError('getTaskFormKey', []))
+    );
+  }
+  postProcessInstance(processDefinitionKey, variables): Observable<any> {
+    const endpoint = `${this.engineRestUrl}process-definition/key/${processDefinitionKey}/start`;
+    return this.http.post<any>(endpoint, variables).pipe(
+      tap(processDefinitions => this.log(`posted process instance`)),
+      catchError(this.handleError('postProcessInstance', []))
+    );
+  }
+
+
 
 }

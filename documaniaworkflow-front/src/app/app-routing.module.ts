@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { DotaskComponent } from './components/dotask/dotask.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { StartProcessComponent } from './components/start-process/start-process.component';
@@ -17,7 +18,9 @@ const routes: Routes = [
       { path: "start", component: StartComponent ,children : [
         {path: "process/:processdefinitionkey", component: StartProcessComponent}
       ] },
-      { path: "tasks", component: TasksComponent }
+      { path: "tasks", component: TasksComponent ,children : [
+        {path: "do/:taskid", component: DotaskComponent}
+      ] }
 
 
 

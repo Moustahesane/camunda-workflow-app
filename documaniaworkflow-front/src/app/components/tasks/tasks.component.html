@@ -1,1 +1,28 @@
-<p>tasks works!</p>
+<div class="container-fluid">
+<div class="row">
+    <div class="col-3">
+        <div class="ui grid">
+            <div class="six wide column">
+              <ul class="tasks">
+                <li *ngFor="let task of tasks">
+                  <p><a routerLink="do/{{task.id}}">{{task.name}}</a></p>
+                </li>
+              </ul>
+            </div>
+            <div class="ten wide column">
+              <div *ngIf="!taskId">
+                <p>Merci de Selectionner.</p>
+              </div>
+            </div>
+          </div>
+          
+    </div>
+<div class="col-6">
+    <router-outlet>
+    </router-outlet>
+</div>
+
+</div>
+
+
+</div> 
