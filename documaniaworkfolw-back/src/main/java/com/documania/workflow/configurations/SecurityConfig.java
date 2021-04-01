@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.catalina.servlets.Constants;
+
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.rest.security.auth.AuthenticationProvider;
 import org.camunda.bpm.engine.rest.security.auth.AuthenticationResult;

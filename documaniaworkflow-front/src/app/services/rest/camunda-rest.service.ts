@@ -11,6 +11,13 @@ let BASE_URL = environment.CAMUNDA_URL
   providedIn: 'root'
 })
 export class CamundaRestService {
+  getPbmnViewer(processDefinitionKey: any) {
+    const url = `${this.engineRestUrl}process-definition/key/${processDefinitionKey}/xml`;
+    return this.http.get<any>(url).pipe(
+      tap(form => this.log(`fetched xml`)),
+      catchError(this.handleError('getProcessDeifnitionxml', []))
+    );
+  }
 
   
 
@@ -32,8 +39,38 @@ private engineRestUrl;
     );
   }
 
+  getTaskKeyVariables(taskId): Observable<any> {
+    const url = `${this.engineRestUrl}task/${taskId}/variables`;
+    return this.http.get<any>(url).pipe(
+      tap(form => this.log(`fetched TaskKeyVariables`)),
+      catchError(this.handleError('geTaskKeyVariables', []))
+    );
+  }
 
 
+  getInformationInstance(processId:any): Observable<any>{
+    const url = `${this.engineRestUrl}history/process-instance/count?processDefinitionKey=${processId}`;
+    return this.http.get<any>(url).pipe(
+      tap(form => this.log(`fetched TaskKeyVariables`)),
+      catchError(this.handleError('geTaskKeyVariables', []))
+    );
+  }
+
+  getInCountInstanceActive(processId:any): Observable<any>{
+    const url = `${this.engineRestUrl}history/process-instance/count?active=true&processDefinitionKey=${processId}`;
+    return this.http.get<any>(url).pipe(
+      tap(form => this.log(`fetched TaskKeyVariables`)),
+      catchError(this.handleError('geTaskKeyVariables', []))
+    );
+  }
+
+  getInCountInstanceCompleted(processId:any): Observable<any>{
+    const url = `${this.engineRestUrl}history/process-instance/count?completed=true&processDefinitionKey=${processId}`;
+    return this.http.get<any>(url).pipe(
+      tap(form => this.log(`fetched TaskKeyVariables`)),
+      catchError(this.handleError('geTaskKeyVariables', []))
+    );
+  }
 
   getProcessDefinitions(): Observable<any> {
     return this.http.get<any>(this.engineRestUrl + 'process-definition?latestVersion=true').pipe(
@@ -80,7 +117,7 @@ private engineRestUrl;
 
   /** Log a HeroService message with the MessageService */
   private log(message: string) {
-    console.log(message);
+    
   }
 
    getStratFormVariables(key) 
@@ -94,9 +131,110 @@ private engineRestUrl;
    
    }
 
+  startTask(): Observable<any>{
+    var headers = new Headers();
+    const endpoint = `${this.engineRestUrl}process-definition/key/Pro3/start`;
+    return this.http.post<any>(endpoint,{ headers: headers}).pipe(
+      tap(form => this.log(`fetched tasks`)),
+      catchError(this.handleError('getTasks', []))
+    );
+  }
+   
+  getCountUnassigned(){
+    var headers = new Headers();
+    const endpoint = `${this.engineRestUrl}task/count`;
+    return this.http.post<any>(endpoint,{"unfinished":true,"unassigned":true,"withoutCandidateGroups":true}).pipe(
+      tap(form => this.log(`fetched tasks`)),
+      catchError(this.handleError('getTasks', []))
+    );
+  }
+
+  getCountAssignedGroup(){
+    var headers = new Headers();
+    const endpoint = `${this.engineRestUrl}task/count`;
+    return this.http.post<any>(endpoint,{"unfinished":true,"unassigned":true,"withCandidateGroups":true}).pipe(
+      tap(form => this.log(`fetched tasks`)),
+      catchError(this.handleError('getTasks', []))
+    );
+
+  }
+   getTheInformationAboutInstance(id:any){
+    const endpoint = `${this.engineRestUrl}task?processDefinitionKey=${id}`;
+    return this.http.get<any>(endpoint).pipe(
+      tap(form => this.log(`fetched tasks`)),
+      catchError(this.handleError('getTasks', []))
+    );
+   }
+   
+   getListOfUsers(){
+    const endpoint = `${this.engineRestUrl}user`;
+    console.log(endpoint)
+    return this.http.get<any>(endpoint).pipe(
+      tap(form => this.log(`fetched tasks`)),
+      catchError(this.handleError('getTasks', []))
+    );
+   }
+
+   setAssignee(idOfTask,idOfUser){
+  const endpoint = `${this.engineRestUrl}task/${idOfTask}/assignee`; 
+  return this.http.post<any>(endpoint,{"userId": idOfUser}).pipe(
+    tap(form => this.log(`fetched tasks`)),
+    catchError(this.handleError('getTasks', []))
+  );
+ 
+   }
+
+    getGroupOfUser(idOfUser:any){
+      const endpoint = `${this.engineRestUrl}group?maxResults=50&firstResult=0`;
+      return this.http.post<any>(endpoint, {member:idOfUser , firstResult: 0, maxResults: 50}).pipe(
+        tap(processDefinitions => this.log(`posted process instance`)),
+        catchError(this.handleError('postProcessInstance', []))
+      );
+    }
+   getGroupId(id:any){
+    const endpoint = `${this.engineRestUrl}task/${id}/identity-links`;
+    return this.http.get<any>(endpoint).pipe(
+      tap(form => this.log(`fetched tasks`)),
+      catchError(this.handleError('getTasks', []))
+    );
+   }
+
+ getCountAssignedUser(){
+  var headers = new Headers();
+  const endpoint = `${this.engineRestUrl}task/count`;
+  return this.http.post<any>(endpoint,{"unfinished":true,"assigned":true}).pipe(
+    tap(form => this.log(`fetched tasks`)),
+    catchError(this.handleError('getTasks', []))
+  );
+
+ }
+
+  getTotalInstances(){
+    const endpoint = `${this.engineRestUrl}task/count`;
+    return this.http.get<any>(endpoint).pipe(
+      tap(form => this.log(`fetched tasks`)),
+      catchError(this.handleError('getTasks', []))
+    );
+  }
+
+   getUserGroups(id:any): Observable<any> {
+    const endpoint = `${this.engineRestUrl}identity/groups?userId=${id}`;
+    return this.http.get<any>(endpoint).pipe(
+      tap(form => this.log(`fetched tasks`)),
+      catchError(this.handleError('getTasks', []))
+    );
+  }
+
+  postTask(): Observable<any> {
+    const endpoint = `${this.engineRestUrl}task?sortBy=created&sortOrder=desc`;
+    return this.http.post<any>(endpoint, {"candidateGroups": JSON.parse(localStorage.getItem("groupsId") )}).pipe(
+      tap(processDefinitions => this.log(`posted process instance`)),
+      catchError(this.handleError('postProcessInstance', []))
+    );
+  }
   
   getTasks(): Observable<any> {
-    const endpoint = `${this.engineRestUrl}task?sortBy=created&sortOrder=desc&maxResults=10`;
+    const endpoint = `${this.engineRestUrl}task?sortBy=created&sortOrder=desc`;
     return this.http.get<any>(endpoint).pipe(
       tap(form => this.log(`fetched tasks`)),
       catchError(this.handleError('getTasks', []))
@@ -112,6 +250,25 @@ private engineRestUrl;
   }
   postProcessInstance(processDefinitionKey, variables): Observable<any> {
     const endpoint = `${this.engineRestUrl}process-definition/key/${processDefinitionKey}/start`;
+    return this.http.post<any>(endpoint, variables).pipe(
+      tap(processDefinitions => this.log(`posted process instance`)),
+      catchError(this.handleError('postProcessInstance', []))
+    );
+  }
+  
+  // claimUser(id):Observable<any>{
+  //   const endpoint = `${this.engineRestUrl}/task/${id}/claim`;
+  //   return this.http.post<any>(endpoint, {"id": id }).pipe(
+  //     tap(processDefinitions => this.log(`posted process instance`)),
+  //     catchError(this.handleError('postProcessInstance', []))
+  //   );
+  // }
+
+
+  postCompleteTask(taskId, variables): Observable<any> {
+
+    const endpoint = `${this.engineRestUrl}task/${taskId}/complete`;
+
     return this.http.post<any>(endpoint, variables).pipe(
       tap(processDefinitions => this.log(`posted process instance`)),
       catchError(this.handleError('postProcessInstance', []))

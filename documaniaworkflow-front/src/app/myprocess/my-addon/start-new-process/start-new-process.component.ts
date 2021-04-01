@@ -4,7 +4,8 @@ import { CamundaRestService } from 'src/app/services/rest/camunda-rest.service';
 
 @Component({
   selector: 'app-start-new-process',
-  templateUrl: './start-new-process.component.html',
+   templateUrl: './start-new-process.component.html',
+  //template: "<formio (submit)='submited({e :$event,en:1})' (beforeSubmit)='submited({e :$event,en:2})' src='https://wuomzrynofxfhge.form.io/startnewjob'></formio>",
   styleUrls: ['./start-new-process.component.css']
 })
 export class StartNewProcessComponent implements OnInit {
@@ -13,11 +14,16 @@ export class StartNewProcessComponent implements OnInit {
   isSubmited = false;
 
   isLoading=true;
-   variableForm
-   processDefinitionKey
-    model;
-    submitVariablesForm = {variables : {}}
+  variableForm
+  processDefinitionKey
+  model;
+  submitVariablesForm = {variables : {}}
 
+  submited(e)
+  {
+    console.log(e);
+    
+  }
 
   constructor(private camundaRestService: CamundaRestService,private route : ActivatedRoute) { 
    

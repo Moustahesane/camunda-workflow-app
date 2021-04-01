@@ -1,0 +1,134 @@
+<div class="container-fluid">
+
+  <div class="row">
+      <div class="col-3">
+          <div class="card">
+              <div class="card-body">
+                  <div class="h4 my-1" style="color: #459afa;">
+                      The List Of Process  :
+                  </div>
+                  <select (change)="changeProcess($event)">
+                      <option selected disabled>------- Select The Process -------</option>
+                      <option *ngFor="let pd of processDefinitions" value={{pd.key}}>{{ pd.name ? pd.name :pd.key }}</option>
+                </select>
+               
+
+
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<br><br><br>
+
+<div class="row">
+<div class="col-9">
+<table class="table">
+    <thead>
+      <tr>
+        <th style="color: #459afa;">The key of process</th>
+        <th style="color: #459afa;">The count of process instances running </th>
+        <th style="color: #459afa;">The count of process instances Active</th>
+        <th style="color: #459afa;">The count of process instances Completed</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span style="font-size: 1.3rem;font-weight: bold;">{{keyOfInstance}}</span></td>
+        <td><span style="font-size: 1.3rem; font-weight: bold;">{{countRuningInstance}}</span></td>
+        <td><span style="font-size: 1.3rem; font-weight: bold;">{{countActiveInstance}}</span></td>
+        <td><span style="font-size: 1.3rem; font-weight: bold;">{{countCompletedInstance}}</span></td>
+      </tr>
+      <tr>
+    </tbody>
+  </table>
+</div>
+ <div class="col-3">
+
+    
+        <div class="inner">
+          <header>
+            <h1 class="section-title ng-binding">Assignments</h1>
+          </header>
+          <table class="cam-table values-left" id="open-task-statistics">
+            <thead>
+              <tr>
+                <th class="ng-binding">Tasks</th>
+                <th class="ng-binding">Types</th>
+              </tr>
+            </thead>
+    
+            <tfoot>
+              <tr>
+                <th>
+                <span>{{countTotal}}</span>
+                </th>
+                <th class="ng-binding">Total</th>
+              </tr>
+            </tfoot>
+    
+            <tbody>
+              <tr class="ng-scope">
+                <th>
+                 <span >{{countAssignedToUser}}</span>
+                </th>
+                <td class="ng-binding">assigned to a user</td>
+              </tr><tr class="ng-scope">
+                <th>
+                 <span>{{countAssignedToGroup}}</span>  
+                </th>
+                <td class="ng-binding">assigned to 1 or more groups</td>
+              </tr><tr class="ng-scope">
+                <th>
+                <span>{{countUnassigned}}</span>
+                </th>
+                <td >unassigned</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    
+
+ </div>
+</div>
+<br><br><br><br><br>
+<h2 style="color: #459afa;">Process Instances :</h2>
+<div class="row">
+    <div class="col-12">
+    <table class="table">
+        <thead>
+          <tr>
+            <th style="color: #459afa;">State</th>
+            <th style="color: #459afa;">Name</th>
+            <th style="color: #459afa;">ID</th>
+            <th style="color: #459afa;">Start Time</th>
+            <th style="color: #459afa;">Due Date</th>
+            <th style="color: #459afa;">Assignee</th>
+            <th style="color: #459afa;">Set Assignee</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of allInformation;let i =index;">
+            <td ><span [style]="'height: 25px; width: 25px; background-color: '+defineColor(item.due)+';border-radius:50%;display:inline-block;'"></span></td>
+            <td>{{item.name}}</td>
+            <td>{{item.id}}</td>
+            <td>{{item.created}}</td>
+            <td>{{item.due ?item.due:"N/A"}}</td> 
+            <td>{{item.assignee}}</td>
+            <td>
+
+          <select style="width: 75%;" (change)="getTaskForAssignee($event,item.id)"> 
+                <option selected disabled>------ New Assignee ------</option>   
+                 <option *ngFor="let pd of listOfUsers" value={{pd.id}}>{{pd.firstName}}<!--will add span here for get the group of user --></option>
+          </select>
+          <button type="button" class="btn btn-info"><i class="fa fa-check" style="width:-27%;margin-left: 10%;"></i></button>
+          </td>
+          </tr>
+        </tbody>
+      </table>
+
+      
+    </div>
+    </div>
+  

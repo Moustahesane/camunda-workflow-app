@@ -8,10 +8,10 @@
                         La liste des proccessus :
                     </div>
                     <ul>
-                        <li *ngFor="let pd of this.processDefinitions"> <a routerLink="process/{{pd.key}}">{{ pd.name ? pd.name :pd.key }}</a> </li>
+                        <li *ngFor="let pd of this.processDefinitions"> <a routerLink="process/{{pd.key}}">{{ pd.name ? pd.name :pd.key }}</a> | <a (click)="view(pd.key)" style="cursor: pointer;">View</a> </li>
                     </ul>
 
-
+                   
                 </div>
             </div>
         </div>

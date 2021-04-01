@@ -20,7 +20,10 @@ import { TasksComponent } from './components/tasks/tasks.component';
 import { StartProcessComponent } from './components/start-process/start-process.component';
 import { GenericformComponent } from './components/genericform/genericform.component';
 import { DotaskComponent } from './components/dotask/dotask.component';
-
+import { NgBpmnEditorModule } from 'ng-bpmn';
+import { ViewbpmnComponent } from './components/viewbpmn/viewbpmn.component';
+import { FormioModule } from 'angular-formio';
+import { StatusComponent } from './components/status/status.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +34,9 @@ import { DotaskComponent } from './components/dotask/dotask.component';
     TasksComponent,
     StartProcessComponent,
     GenericformComponent,
-    DotaskComponent
+    DotaskComponent,
+    ViewbpmnComponent,
+    StatusComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +44,11 @@ import { DotaskComponent } from './components/dotask/dotask.component';
     NgbModule,
     CommonModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgBpmnEditorModule,
+    FormioModule,
+    
+    
   ],
   providers: [
     AppTextConfigService,

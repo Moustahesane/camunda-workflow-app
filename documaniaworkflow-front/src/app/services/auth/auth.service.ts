@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-
+import {CamundaRestService} from '../rest/camunda-rest.service';
 const BASE_AUTH_URL =environment.CAMUNDA_URL+"identity/verify"
 
 
@@ -12,16 +12,15 @@ const BASE_AUTH_URL =environment.CAMUNDA_URL+"identity/verify"
 export class AuthService {
 
 
-
+  
   USER_NAME_SESSION_ATTRIBUTE_NAME = 'authenticatedUser'
   AUTH_ATTRIBUTE_NAME = 'AUTH'
 
   public username: String;
   public password: String;
   public id : String;
-
   constructor(private http: HttpClient) {
-
+   
   }
 
   authenticationService(username: String, password: String) {
@@ -48,6 +47,11 @@ export class AuthService {
   registerSuccessfulLogin(username, password) {
     sessionStorage.setItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME, username);
     sessionStorage.setItem(this.AUTH_ATTRIBUTE_NAME,this.createBasicAuthToken(username,password));
+    // this.CamundaRest1.getUserGroups(username).subscribe(succ=>{
+    //     this.userGroups =succ;
+    //     alert(this.userGroups);
+    // })
+
   }
 
   logout() {
